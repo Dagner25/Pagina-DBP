@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Datos Ingresados</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f7f6;
+            margin: 0;
+            padding: 50px 20px;
+        }
+        .datos-container {
+            max-width: 800px;
+            margin: auto;
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        h2 {
+            color: #333;
+            font-size: 28px;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #007BFF;
+            padding-bottom: 10px;
+            display: inline-block;
+        }
+        .section {
+            margin-bottom: 25px;
+            text-align: left;
+        }
+        .section p {
+            font-size: 16px;
+            color: #555;
+            line-height: 1.6;
+        }
+        .section strong {
+            color: #007BFF;
+        }
+        .datos-header {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+        .datos-header img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 20px;
+        }
+        .datos-header div {
+            text-align: left;
+        }
+        .datos-header h1 {
+            font-size: 24px;
+            margin: 0;
+        }
+        .datos-header p {
+            font-size: 16px;
+            color: #666;
+            margin: 5px 0;
+        }
+        .section-title {
+            color: #333;
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+        .habilidades {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 10px;
+        }
+        .habilidad-item {
+            text-align: center;
+            background-color: #f1f1f1;
+            padding: 10px;
+            border-radius: 10px;
+            flex: 1;
+            margin: 0 10px;
+        }
+        .habilidad-item p {
+            margin: 5px 0;
+        }
+        .habilidad-item span {
+            display: block;
+            font-size: 18px;
+            color: #333;
+            font-weight: bold;
+        }
+        footer {
+            margin-top: 30px;
+            text-align: center;
+            color: #888;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="datos-container">
+    <div class="datos-header">
+        <img src="https://via.placeholder.com/120" alt="Foto de perfil" id="imagenPerfil">
+        <div>
+            <h1 id="nombre"></h1>
+            <p id="ocupacion"></p>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Datos Personales</h2>
+        <p><strong>Fecha de Nacimiento:</strong> <span id="fechaNacimiento"></span></p>
+        <p><strong>Género:</strong> <span id="genero"></span></p>
+        <p><strong>Nacionalidad:</strong> <span id="nacionalidad"></span></p>
+        <p><strong>Contacto:</strong> <span id="contacto"></span></p>
+    </div>
+
+    <div class="section">
+        <h2>Datos Profesionales</h2>
+        <p><strong>Nivel de inglés:</strong> <span id="nivelIngles"></span></p>
+        <p><strong>Lenguajes de Programación:</strong> <span id="lenguajes"></span></p>
+    </div>
+
+    <div class="section">
+        <h2>Habilidades y Aptitudes</h2>
+        <p><strong>Aptitudes:</strong> <span id="aptitudes"></span></p>
+        <p><strong>Habilidades:</strong> <span id="habilidades"></span></p>
+    </div>
+
+    <div class="section">
+        <h2>Perfil Profesional</h2>
+        <p id="perfil"></p>
+    </div>
+</div>
+
+<footer>
+    <p>Todos los datos han sido ingresados correctamente.</p>
+</footer>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const datosUsuario = JSON.parse(localStorage.getItem('datosUsuario'));
+
+        if (datosUsuario) {
+            document.getElementById('nombre').innerText = datosUsuario.nombre;
+            document.getElementById('fechaNacimiento').innerText = datosUsuario.fechaNacimiento;
+            document.getElementById('ocupacion').innerText = datosUsuario.ocupacion;
+            document.getElementById('contacto').innerText = datosUsuario.contacto;
+            document.getElementById('genero').innerText = datosUsuario.genero;
+            document.getElementById('nacionalidad').innerText = datosUsuario.nacionalidad;
+            document.getElementById('nivelIngles').innerText = datosUsuario.nivelIngles;
+            document.getElementById('lenguajes').innerText = datosUsuario.lenguajes;
+            document.getElementById('aptitudes').innerText = datosUsuario.aptitudes;
+            document.getElementById('habilidades').innerText = datosUsuario.habilidades;
+            document.getElementById('perfil').innerText = datosUsuario.perfil;
+
+            // Cambiar la imagen de perfil según el género
+            const imagenPerfil = document.getElementById('imagenPerfil');
+            if (datosUsuario.genero === 'hombre') {
+                imagenPerfil.src = 'https://via.placeholder.com/120/007BFF/FFFFFF?text=Hombre';
+            } else if (datosUsuario.genero === 'mujer') {
+                imagenPerfil.src = 'https://via.placeholder.com/120/FF69B4/FFFFFF?text=Mujer';
+            }
+        }
+    });
+</script>
+
+</body>
+</html>
+

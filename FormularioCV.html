@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario de Datos</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        form {
+            max-width: 600px;
+            margin: auto;
+        }
+        label {
+            display: block;
+            margin: 10px 0 5px;
+        }
+        input, select, textarea {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+        }
+        input[type="radio"], input[type="checkbox"] {
+            width: auto;
+        }
+        button {
+            padding: 10px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<h2>Formulario de Datos Personales</h2>
+<form id="userForm" action="resultados.html" method="GET" onsubmit="guardarDatos()">
+    <label for="nombre">Nombre y Apellidos:</label>
+    <input type="text" id="nombre" name="nombre" required>
+
+    <label for="fechaNacimiento">Fecha de Nacimiento:</label>
+    <input type="date" id="fechaNacimiento" name="fechaNacimiento" required>
+
+    <label for="ocupacion">Ocupación:</label>
+    <input type="text" id="ocupacion" name="ocupacion" required>
+
+    <label for="contacto">Contacto (teléfono, email):</label>
+    <input type="text" id="contacto" name="contacto" required>
+
+    <label for="genero">Género:</label>
+    <select id="genero" name="genero" required>
+        <option value="hombre">Hombre</option>
+        <option value="mujer">Mujer</option>
+    </select>
+
+    <label for="nacionalidad">Nacionalidad:</label>
+    <select id="nacionalidad" name="nacionalidad" required>
+        <option value="España">España</option>
+        <option value="México">México</option>
+        <option value="Argentina">Argentina</option>
+        <option value="Colombia">Colombia</option>
+        <option value="Otro">Otro</option>
+    </select>
+
+    <label for="nivelIngles">Nivel de inglés:</label>
+    <input type="radio" id="basico" name="nivelIngles" value="Básico" required>
+    <label for="basico">Básico</label>
+    <input type="radio" id="intermedio" name="nivelIngles" value="Intermedio">
+    <label for="intermedio">Intermedio</label>
+    <input type="radio" id="avanzado" name="nivelIngles" value="Avanzado">
+    <label for="avanzado">Avanzado</label>
+    <input type="radio" id="fluido" name="nivelIngles" value="Fluido">
+    <label for="fluido">Fluido</label>
+
+    <label for="lenguajes">Lenguajes de Programación:</label>
+    <select id="lenguajes" name="lenguajes" multiple required>
+        <option value="JavaScript">JavaScript</option>
+        <option value="Python">Python</option>
+        <option value="Java">Java</option>
+        <option value="C++">C++</option>
+        <option value="PHP">PHP</option>
+    </select>
+
+    <label for="aptitudes">Aptitudes:</label>
+    <input list="aptitudesList" id="aptitudes" name="aptitudes" required>
+    <datalist id="aptitudesList">
+        <option value="Trabajo en equipo">
+        <option value="Resolución de problemas">
+        <option value="Liderazgo">
+        <option value="Comunicación">
+    </datalist>
+
+    <label>Habilidades:</label>
+    <input type="checkbox" id="html" name="habilidades" value="HTML">
+    <label for="html">HTML</label>
+    <input type="checkbox" id="css" name="habilidades" value="CSS">
+    <label for="css">CSS</label>
+    <input type="checkbox" id="js" name="habilidades" value="JavaScript">
+    <label for="js">JavaScript</label>
+
+    <label for="perfil">Perfil:</label>
+    <textarea id="perfil" name="perfil" rows="4" required></textarea>
+
+    <button type="submit">Enviar</button>
+</form>
+
+<script>
+    function guardarDatos() {
+        const form = document.forms['userForm'];
+        const datos = {
+            nombre: form['nombre'].value,
+            fechaNacimiento: form['fechaNacimiento'].value,
+            ocupacion: form['ocupacion'].value,
+            contacto: form['contacto'].value,
+            genero: form['genero'].value,
+            nacionalidad: form['nacionalidad'].value,
+            nivelIngles: form['nivelIngles'].value,
+            lenguajes: Array.from(form['lenguajes'].selectedOptions).map(option => option.value).join(', '),
+            aptitudes: form['aptitudes'].value,
+            habilidades: Array.from(form.querySelectorAll('input[name="habilidades"]:checked')).map(h => h.value).join(', '),
+            perfil: form['perfil'].value
+        };
+        
+        localStorage.setItem('datosUsuario', JSON.stringify(datos));
+    }
+</script>
+
+</body>
+</html>
